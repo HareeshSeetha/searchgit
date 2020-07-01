@@ -1,0 +1,78 @@
+<!-- header section -->
+<form action="" class="search-form">
+    <div class="header">
+        <input type="text" class="search-box" placeholder="Search git users with username" [(ngModel)]="username"
+            name="username" (keyup)="findProfile()">
+    </div>
+</form>
+<!-- header sections ends -->
+
+<!-- body card -->
+<div *ngIf="profile" class="w3-container">
+    <div class="w3-card-4" style="width:100%">
+        <!-- profile with img -->
+        <header class="w3-container w3-light-grey">
+            <div class="profile-img">
+                <img src="{{profile.avatar_url}}" class="img-circle img-responsive" alt="Profile Image">
+            </div>
+            <ul class="list">
+                <li>
+                    <h2>{{profile.name}}</h2>
+                </li>
+                <li><span *ngIf="profile.company">Works at {{profile.company}}</span></li>
+                <li> {{profile.location}}</li>
+            </ul>
+        </header>
+        <!-- profile with img ends -->
+        <!-- sub header -->
+        <hr class="solid">
+        <div class="panel-body">
+            <div class="col-sm-5">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngIf="profile.bio">{{profile.bio}}</li>
+                    <li class="list-group-item" *ngIf="profile.hireable">Available for hire</li>
+                    <li class="list-group-item" *ngIf="profile.blog"><a href="{{profile.blog}}"
+                            target="_blank">{{profile.blog}}</a></li>
+                    <li class="list-group-item" *ngIf="profile.email"><a
+                            href="emailto:{{profile.email}}">{{profile.email}}</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-s">
+                    <i class="fas fa-heart">{{profile.followers}} Followers</i>
+                    <i class='fab fa-creative-commons-by'>{{profile.following}}Following</i>
+                    <i class='fab fa-galactic-republic'>{{profile.public_gists}} Public gists</i>
+                    <i class='fas fa-comment-alt'>{{profile.public_repos}} Public Repos</i>
+                </div>
+                <hr class="solid">
+                <div class="link">
+                    <a href="{{profile.html_url}}" target="_blank" class="btn btn-success btn-sm">View profile on
+                        github</a>
+                </div>
+            </div>
+        </div>
+        <!-- sub header ends -->
+        <div>
+            <header class="repos w3-light-grey">
+                <h1>Repos</h1>
+            </header>
+        </div>
+        <!-- looping for cards -->
+        <div class="cards">
+
+            <div class="w3-card-4" style="width:60%" *ngFor="let repo of repos; let i=index">
+                <div class="clearfix">
+                    <p>{{repo.name}}</p>
+                    <p> <a href="{{repo.html_url}}" target="_blank" class="btn btn-sm ">Viewthis project on
+                            github</a>
+                    </p>
+                    <p>{{repo.description}}</p>
+
+                </div>
+            </div>
+        </div>
+        <!-- looping for cards ends -->
+    </div>
+</div>
+
+<!-- body card ends -->
